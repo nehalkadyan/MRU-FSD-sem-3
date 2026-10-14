@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config();
+const dotenv = require("dotenv").config()
 
 // impported user routes 
 const userRoutes = require('./routes/user.routes');
@@ -12,13 +12,11 @@ app.use(express.json());
 
 app.use('/api', userRoutes);
 
-mongoose.connect("mongodb+srv://kadyannehal333_db_user:P5QZeLNkkzmKb6NE@cluster0.ifppgnj.mongodb.net/?appName=Cluster0")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('Connected to MongoDB');
-  })
-  .catch((err) => console.log(err));
+  }).catch((err) => console.log(err));
 
-app.listen(3000, () => console.log(`Server running on port 3000`));
-
-// nCuHHHFISHhdv6uF
-// kadyannehal333_db_user
+app.listen(process.env.PORT, () => {
+  console.log("Server is Running on port 3000")
+})
